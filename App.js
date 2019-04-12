@@ -1,7 +1,9 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
+import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
+import { AppLoading, Asset, Font, Icon, Constants } from "expo";
 import AppNavigator from './navigation/AppNavigator';
+
+import DataRoot from "./components/DataRoot";
 
 export default class App extends React.Component {
   state = {
@@ -20,8 +22,12 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
+           <View style={{ backgroundColor: "lightblue", height: Constants.statusBarHeight }}>
+             <StatusBar translucent backgroundColor="lightblue"/>
+            </View>
+          <DataRoot>
+             <AppNavigator />
+          </DataRoot>
         </View>
       );
     }
