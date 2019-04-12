@@ -2,7 +2,7 @@ import { AsyncStorage } from "react-native";
 
 export const GET_DECKS_SUCCESS = "GET_DECKS_SUCCESS";
 export const ADD_CARD_SUCCESS = "ADD_CARD_SUCCESS";
-
+export const ADD_DECK_SUCCESS = "ADD_DECK_SUCCESS";
 
 const DECKS_STORAGE_KEY = "UdaciCards:decks"
 
@@ -22,6 +22,8 @@ export function requestInitialData() {
       Object.assign(obj, {
 
         ["_" + index]: {
+          key: "_" + index,
+          timestamp: Date.now(),
           title: "title " + index,
           questions: (new Array(Math.random() * 10 | 0 )).fill().map((_, index) => {
             return {
@@ -60,5 +62,25 @@ export function addCardSuccess({ key, question, answer }) {
 export function requestAddCard({ key, question, answer }) {
   return function (dispatch) {
     dispatch(addCardSuccess({ key, question, answer }));
+  }
+}
+
+export function addDeckSuccess({ deck }) {
+  return {
+    type: ADD_DECK_SUCCESS,
+    deck
+  };
+}
+
+export function requestAddDeck({ title }) {
+  return function (dispatch) {
+    const key = Math.random().toString(36) + title + Date.now().toString(36);
+    const deck = {
+      key,
+      timestamp: Date.now(),
+      title: String(title),
+      questions: []
+    }
+    dispatch(addDeckSuccess({ deck }));
   }
 }

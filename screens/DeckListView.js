@@ -55,6 +55,7 @@ class DeckListView extends React.Component {
 function mapStateToProps(decks) {
   return {
     decksArray: decksCollectionToArray(decks)
+      .sort((a, b) => b.timestamp - a.timestamp)
   }
 };
 

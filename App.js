@@ -9,10 +9,10 @@ import DeckListView from './screens/DeckListView';
 import DeckOverview from './screens/DeckOverview';
 import AddCard from './screens/AddCard';
 import QuizView from './screens/QuizView';
+import AddDeck from './screens/AddDeck';
 
 
-
-import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 const HOME = class extends React.Component {
 
@@ -26,8 +26,7 @@ const HOME = class extends React.Component {
   }
 }
 
-
-const Navigatore = createAppContainer(createStackNavigator({
+const DecksNavigator = createAppContainer(createStackNavigator({
   DeckListView: {
     screen: DeckListView,
   },
@@ -54,6 +53,14 @@ const Navigatore = createAppContainer(createStackNavigator({
     backgroundColor: "red"
   }
 }));
+
+const Navigatore = createAppContainer(createBottomTabNavigator({
+  DeckListView: {
+    screen: DecksNavigator
+  },
+  AddDeck
+}));
+
 
 
 export default class App extends React.Component {

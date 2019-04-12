@@ -1,4 +1,4 @@
-import { GET_DECKS_SUCCESS, ADD_CARD_SUCCESS } from "../actions";
+import { GET_DECKS_SUCCESS, ADD_CARD_SUCCESS, ADD_DECK_SUCCESS } from "../actions";
 
 export default function decks(decks = {}, action) {
 
@@ -18,6 +18,12 @@ export default function decks(decks = {}, action) {
           questions: [...decks[action.key].questions, action.payload]
         }
       }
+
+      case ADD_DECK_SUCCESS:
+        return {
+          ...decks,
+          [action.deck.key]: action.deck
+        }
 
     default:
       return decks;
