@@ -5,6 +5,57 @@ import AppNavigator from './navigation/AppNavigator';
 
 import DataRoot from "./components/DataRoot";
 
+import DeckListView from './screens/DeckListView';
+import DeckOverview from './screens/DeckOverview';
+import AddCard from './screens/AddCard';
+import QuizView from './screens/QuizView';
+
+
+
+import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
+
+const HOME = class extends React.Component {
+
+  static navigationOptions = {
+    title: "Decks"
+  };
+
+  render() {
+    const { navigation } = this.props;
+    return <Text onPress={() => navigation.navigate("Coniglio")}>La mia casa</Text>;
+  }
+}
+
+
+const Navigatore = createAppContainer(createStackNavigator({
+  DeckListView: {
+    screen: DeckListView,
+  },
+  DeckOverview: {
+    screen: DeckOverview
+  },
+  AddCard: {
+    screen: AddCard
+  },
+  QuizView: {
+    screen: QuizView
+  }
+}, {
+  initialRouteName: "DeckListView",
+  ...Platform.select({
+    ios: {
+      mode: "modal"
+    },
+    android: {
+      mode: "card"
+    }
+  }),
+  headerStyle: {
+    backgroundColor: "red"
+  }
+}));
+
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -26,7 +77,7 @@ export default class App extends React.Component {
              <StatusBar translucent backgroundColor="lightblue"/>
             </View>
           <DataRoot>
-             <AppNavigator />
+             <Navigatore />
           </DataRoot>
         </View>
       );
