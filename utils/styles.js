@@ -83,7 +83,16 @@ export default styles = StyleSheet.create({
   invert: {
     backgroundColor: "lightblue",
     color: "white",
-    borderColor: "white",
+    borderWidth: 0
+  },
+  correctButton: {
+    backgroundColor: "green",
+    color: "white",
+    borderWidth: 0
+  },
+  wrongButton: {
+    backgroundColor: "red",
+    color: "white",
     borderWidth: 0
   },
   textInput: {
@@ -93,5 +102,23 @@ export default styles = StyleSheet.create({
     borderWidth: 2,
     fontSize: 30,
     margin: 20
+  },
+  text: {
+    margin: 10,
+    textAlign: "center",
+    fontSize: 18
+  },
+  questionText: {
+    margin: 10,
+    textAlign: "center",
+    fontSize: 22,
+  },
+  answerText: {
+    margin: 10,
+    textAlign: "center",
+    fontSize: 24,
+    color: "lightblue",
+    fontWeight: "bold"
   }
+
 });
