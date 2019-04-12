@@ -44,7 +44,7 @@ class DeckOverview extends React.Component {
               accessibilityLabel={`Add a new card to the deck ${deck.title}`}
             />
             <TextButton
-              style={styles.textButtonInvert}
+              style={styles.invert}
               onPress={() => startQuiz(key)}
               title="Start Quiz"
               accessibilityLabel={`Start the quiz for the deck ${deck.title}`}

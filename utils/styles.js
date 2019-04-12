@@ -27,7 +27,7 @@ export default styles = StyleSheet.create({
     alignItems: "stretch"
   },
   deckOverviewButtons: {
-    alignItems: "center"
+    alignItems: "stretch"
   },
   decksListContent: {
     alignItems: "center",
@@ -63,9 +63,7 @@ export default styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     padding: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    minWidth: 250,
+    margin: 20,
     textAlign: "center",
     ...Platform.select({
       ios: {
@@ -82,10 +80,18 @@ export default styles = StyleSheet.create({
       }
     })
   },
-  textButtonInvert: {
+  invert: {
     backgroundColor: "lightblue",
     color: "white",
     borderColor: "white",
     borderWidth: 0
+  },
+  textInput: {
+    backgroundColor: "white",
+    color: "lightblue",
+    borderColor: "lightblue",
+    borderWidth: 2,
+    fontSize: 30,
+    margin: 20
   }
 });

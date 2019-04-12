@@ -3,63 +3,83 @@ import { connect } from "react-redux";
 
 import styles from "../utils/styles";
 
-import { DeckInfo } from "../components/DeckInfo";
 import { TextButton } from "../components/TextButton";
 
-import { View, Text } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 
-import { decksCollectionToArray } from "../utils/helper";
+import { requestAddCard } from "../actions";
 
 class DeckOverview extends React.Component {
 
   static navigationOptions = {
   //  header: null,
-    title: "Deck Details"
+    title: "Add Card"
   };
 
-  addCard = (key) => this.props.navigation.push("AddCard", {key});
+  state = {
+    question: "",
+    answer: ""
+  }
 
-  startQuiz = (key) => this.props.navigation.push("QuizView", {key});
+  handleSubmit = () => {
+    const { dispatch, navigation } = this.props;
+    const { question, answer } = this.state;
+    const { key } = navigation.state.params;
 
+    dispatch(requestAddCard({ key, question, answer }));
+    this.setState({ question: "", answer: ""});
+    navigation.navigate("DeckOverview", {key});
+  }
 
   render() {
-    const { decks, navigation } = this.props;
-    const { key } = navigation.state.params;
-    const deck = decks[key];
 
-    if (! deck) return null;
+    const { question, answer } = this.state;
+
+    const isValidated = !!(question.trim().length && answer.trim().length);
 
     return (
       <View style={styles.container}>
-        <View style={styles.deckOverview}>
+        <View style={[styles.deckOverview, {flex: 0.6}]}>
 
-            <DeckInfo deck={deck} />
+        <View>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Your question..."
+            value={question}
+            onChangeText={(question) => this.setState({question})}
+          />
 
-            <Text>ADD CARD</Text>
+          <TextInput
+            style={styles.textInput}
+            placeholder="... and answer"
+            value={answer}
+            onChangeText={(answer) => this.setState({answer})}
+          />
+        </View>
 
-          <View style={styles.deckOverviewButtons}>
+        {
+          (isValidated) ? (
             <TextButton
-              onPress={() => addCard(key)}
-              title="Add Card"
-              accessibilityLabel={`Add a new card to the deck ${deck.title}`}
+              style={styles.invert}
+              onPress={this.handleSubmit}
+              title="Submit :)"
+              accessibilityLabel={`Add a new question to the deck`}
             />
+          )
+
+          : (
             <TextButton
-              style={styles.textButtonInvert}
-              onPress={() => startQuiz(key)}
-              title="Start Quiz"
-              accessibilityLabel={`Start the quiz for the deck ${deck.title}`}
+              onPress={() => null}
+              title="Too short to submit :("
+              accessibilityLabel={`Type a question and the answer to add new card to the deck`}
             />
-          </View>
+          )
+        }
+
         </View>
       </View>
     );
   }
 }
 
-function mapStateToProps(decks) {
-  return {
-    decks
-  }
-};
-
-export default connect(mapStateToProps)(DeckOverview);
+export default connect()(DeckOverview);

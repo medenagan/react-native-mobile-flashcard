@@ -33,7 +33,7 @@ class DeckOverview extends React.Component {
       <View style={styles.container}>
         <View style={styles.deckOverview}>
 
-            <DeckInfo deck={deck} />
+          <DeckInfo deck={deck} />
 
           <View style={styles.deckOverviewButtons}>
             <TextButton
@@ -42,7 +42,7 @@ class DeckOverview extends React.Component {
               accessibilityLabel={`Add a new card to the deck ${deck.title}`}
             />
             <TextButton
-              style={styles.textButtonInvert}
+              style={styles.invert}
               onPress={() => this.handleStartQuiz(key)}
               title="Start Quiz"
               accessibilityLabel={`Start the quiz for the deck ${deck.title}`}
