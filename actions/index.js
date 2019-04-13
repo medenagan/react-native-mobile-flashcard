@@ -1,11 +1,11 @@
-import { AsyncStorage } from "react-native";
+import { getDecks, saveDeck, deleteDeck, appendDeckCards } from "../utils/api";
+import { createDummyDeck } from "../utils/dummy";
+import { generateRandomKey, validateCardsInDeck } from "../utils/helper";
 
 export const GET_DECKS_SUCCESS = "GET_DECKS_SUCCESS";
 export const ADD_CARD_SUCCESS = "ADD_CARD_SUCCESS";
 export const ADD_DECK_SUCCESS = "ADD_DECK_SUCCESS";
 export const DELETE_DECK_SUCCESS = "DELETE_DECK_SUCCESS";
-
-const DECKS_STORAGE_KEY = "UdaciCards:decks"
 
 function getDecksSuccess(decks) {
   return {
@@ -14,37 +14,17 @@ function getDecksSuccess(decks) {
   }
 }
 
-export function requestInitialData() {
-  return function (despatch) {
-
-    const obj = {};
-
-    (new Array(0)).fill().forEach((_, index) => (
-      Object.assign(obj, {
-
-        ["_" + index]: {
-          key: "_" + index,
-          timestamp: Date.now(),
-          title: "title " + index,
-          questions: (new Array(Math.random() * 10 | 0 )).fill().map((_, index) => {
-            return {
-              question: index + '_What is React?',
-              answer: index + '_A library for managing user interfaces'
-            };
-          })
-        }
-
-
-      })
-    ));
-
-
-    despatch(getDecksSuccess(
-      obj
-    ));
-
-    AsyncStorage.getItem(DECKS_STORAGE_KEY)
-      .then(raw => console.log("AsyncDecks:", raw));
+export function requestGetDecks() {
+  return function(dispatch) {
+    getDecks().then(decks => {
+      // First time: create one starter deck
+      if (! decks) {
+        dispatch(requestAddDeck(createDummyDeck()));
+      }
+      else {
+        dispatch(getDecksSuccess(decks));
+      }
+    }).catch(e => console.warn("Could not load decks:", e));
   }
 }
 
@@ -62,7 +42,9 @@ export function addCardSuccess({ key, question, answer }) {
 
 export function requestAddCard({ key, question, answer }) {
   return function (dispatch) {
-    dispatch(addCardSuccess({ key, question, answer }));
+    appendDeckCards({ key, cards: [{ question, answer }] })
+      .then(_=> dispatch(addCardSuccess({ key, question, answer })))
+      .catch(e => console.warn("Could not append this card:", e));
   }
 }
 
@@ -73,16 +55,18 @@ export function addDeckSuccess({ deck }) {
   };
 }
 
-export function requestAddDeck({ title }) {
+export function requestAddDeck({ title, questions }) {
   return function (dispatch) {
-    const key = Math.random().toString(36) + title + Date.now().toString(36);
+    const key = key || generateRandomKey(title);
     const deck = {
       key,
       timestamp: Date.now(),
-      title: String(title),
-      questions: []
+      title: String(title || "Untitled"),
+      questions: validateCardsInDeck(questions)
     }
-    dispatch(addDeckSuccess({ deck }));
+    saveDeck(deck)
+      .then(_=> dispatch(addDeckSuccess({ deck })))
+      .catch(e => console.warn("Could not add this deck:", e));
   }
 }
 
@@ -96,6 +80,8 @@ export function deleteDeckSuccess({ key }) {
 
 export function requestDeleteDeck({ key }) {
   return function (dispatch) {
-    dispatch(deleteDeckSuccess({ key }));
+    deleteDeck({ key })
+      .then(_=> dispatch(deleteDeckSuccess({ key })))
+      .catch(e => console.warn("Could not delete this deck:", e));
   }
 }

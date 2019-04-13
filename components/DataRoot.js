@@ -3,14 +3,14 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "../reducers";
 import middleware from "../middleware";
-import { requestInitialData } from "../actions";
+import { requestGetDecks } from "../actions";
 
 const store = createStore(reducer, middleware);
 
 class DataRoot extends React.Component {
 
   componentDidMount() {
-    store.dispatch(requestInitialData())
+    store.dispatch(requestGetDecks())
   }
 
   render() {
