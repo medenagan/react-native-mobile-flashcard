@@ -27,7 +27,7 @@ class AddDeck extends React.Component {
 
     dispatch(requestAddDeck({ title }));
     this.setState({ title: ""});
-    navigation.navigate("DeckListView");
+    navigation.navigate("DeckOverview", { key: null} );
   }
 
   render() {

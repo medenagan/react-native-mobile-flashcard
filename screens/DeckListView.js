@@ -41,6 +41,15 @@ class DeckListView extends React.Component {
   render() {
     const { decksArray } = this.props;
 
+    // No decks to show
+    if (! decksArray.length) {
+      return (
+        <View style={styles.container}>
+          <Text style={[styles.text, {color: "lightgray"}]}>There are no decks. Add your first one!</Text>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.container}>
         <FlatList

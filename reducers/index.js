@@ -1,4 +1,9 @@
-import { GET_DECKS_SUCCESS, ADD_CARD_SUCCESS, ADD_DECK_SUCCESS } from "../actions";
+import {
+  GET_DECKS_SUCCESS,
+  ADD_CARD_SUCCESS,
+  ADD_DECK_SUCCESS,
+  DELETE_DECK_SUCCESS
+} from "../actions";
 
 export default function decks(decks = {}, action) {
 
@@ -19,11 +24,16 @@ export default function decks(decks = {}, action) {
         }
       }
 
-      case ADD_DECK_SUCCESS:
-        return {
-          ...decks,
-          [action.deck.key]: action.deck
-        }
+    case ADD_DECK_SUCCESS:
+      return {
+        ...decks,
+        [action.deck.key]: action.deck
+      }
+
+    case DELETE_DECK_SUCCESS:
+      const newDecks = {...decks};
+      delete newDecks[action.key];
+      return newDecks;
 
     default:
       return decks;

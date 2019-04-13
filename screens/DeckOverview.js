@@ -6,9 +6,11 @@ import styles from "../utils/styles";
 import { DeckInfo } from "../components/DeckInfo";
 import { TextButton } from "../components/TextButton";
 
-import { View } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 
-import { decksCollectionToArray } from "../utils/helper";
+import { findLatestDeck } from "../utils/helper";
+
+import { requestDeleteDeck } from "../actions"
 
 class DeckOverview extends React.Component {
 
@@ -21,11 +23,29 @@ class DeckOverview extends React.Component {
 
   handleStartQuiz = (key) => this.props.navigation.push("QuizView", {key});
 
+  handleDelete = (deck) => {
+    Alert.alert("Delete Deck", `''${deck.title}' will NOT be recoverable`, [
+      {
+        text: "Keep",
+        style: "cancel"
+      }, {
+        text: "Sweep",
+        onPress: () => {
+          const { dispatch, navigation } = this.props;
+          dispatch(requestDeleteDeck({ key: deck.key }));
+          navigation.navigate("DeckListView");
+        }
+      }
+    ]);
+  }
+
 
   render() {
     const { decks, navigation } = this.props;
     const { key } = navigation.state.params;
-    const deck = decks[key];
+
+    // Can either show a specific deck or the latest one created
+    const deck = key ? decks[key] : findLatestDeck(decks);
 
     if (! deck) return null;
 
@@ -37,16 +57,21 @@ class DeckOverview extends React.Component {
 
           <View style={styles.deckOverviewButtons}>
             <TextButton
-              onPress={() => this.handleAddCard(key)}
+              onPress={() => this.handleAddCard(deck.key)}
               title="Add Card"
               accessibilityLabel={`Add a new card to the deck ${deck.title}`}
             />
             <TextButton
               style={styles.invert}
-              onPress={() => this.handleStartQuiz(key)}
+              onPress={() => this.handleStartQuiz(deck.key)}
               title="Start Quiz"
               accessibilityLabel={`Start the quiz for the deck ${deck.title}`}
             />
+            <TouchableOpacity
+              onPress={() => this.handleDelete(deck)}
+            >
+              <Text style={[styles.text, {color: "red"}]}>Delete this deck</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
