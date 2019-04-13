@@ -39,7 +39,7 @@ const stackStackNavigatorConfigs = {
 const DecksNavigator = createStackNavigator(stackRouteConfigs, stackStackNavigatorConfigs);
 
 const tabRouteConfigs = {
-  DeckListView: {
+  Decks: {
     screen: DecksNavigator,
     navigationOptions: {
       title: "Decks"
@@ -54,7 +54,7 @@ const tabRouteConfigs = {
 };
 
 const materialTopNavigatorConfigs = {
-  initialRouteName: "DeckListView",
+  initialRouteName: "Decks",
   tabBarOptions: {
     labelStyle: {
       fontSize: 14,
@@ -67,7 +67,7 @@ const materialTopNavigatorConfigs = {
 };
 
 const bottomNavigatorConfigs = {
-  initialRouteName: "DeckListView",
+  initialRouteName: "Decks",
   tabBarOptions: {
     activeTintColor: "lightblue",
     inactiveTintColor: "lightgrey",
