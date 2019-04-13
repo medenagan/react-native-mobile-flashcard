@@ -5,7 +5,7 @@ import styles from "../utils/styles";
 
 import { TextButton } from "../components/TextButton";
 
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
 
 import { requestAddDeck } from "../actions";
 
@@ -37,7 +37,8 @@ class AddDeck extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={[styles.deckOverview, {flex: 1}]}>
+        <KeyboardAvoidingView style={styles.deckOverview} behavior="position" enabled>
+
 
           <Text
             style={[styles.text, {color: "lightblue", fontSize: 40}]}
@@ -45,30 +46,30 @@ class AddDeck extends React.Component {
             Choose a title for this new deck
           </Text>
 
-          <TextInput
-            style={styles.textInput}
-            placeholder="Title"
-            value={title}
-            onChangeText={(title) => this.setState({title})}
-          />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Title"
+              value={title}
+              onChangeText={(title) => this.setState({title})}
+            />
 
-        <Text style={[styles.text, {color: "red"}]}>
-          {
-            titles.includes(title.toLowerCase())
-              ? "Please note this title already exists. Are you sure?"
-              : " "
-          }
-        </Text>
+            <Text style={[styles.text, {color: "red"}]}>
+              {
+                titles.includes(title.toLowerCase())
+                  ? "Please note this title already exists. Are you sure?"
+                  : " "
+              }
+            </Text>
+
+            <TextButton
+              style={styles.invert}
+              onPress={this.handleSubmit}
+              title="Create"
+              accessibilityLabel={`Click to append this deck to your collection`}
+            />
 
 
-        <TextButton
-          style={styles.invert}
-          onPress={this.handleSubmit}
-          title="Create"
-          accessibilityLabel={`Click to append this deck to your collection`}
-        />
-
-        </View>
+        </KeyboardAvoidingView>
       </View>
     );
   }

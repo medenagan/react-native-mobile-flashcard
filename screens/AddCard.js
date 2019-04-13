@@ -5,7 +5,7 @@ import styles from "../utils/styles";
 
 import { TextButton } from "../components/TextButton";
 
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
 
 import { requestAddCard } from "../actions";
 
@@ -39,7 +39,7 @@ class DeckOverview extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={[styles.deckOverview, {flex: 0.6}]}>
+        <KeyboardAvoidingView style={styles.deckOverview} behavior="padding" enabled>
 
         <View>
           <TextInput
@@ -76,7 +76,7 @@ class DeckOverview extends React.Component {
           )
         }
 
-        </View>
+        </KeyboardAvoidingView>
       </View>
     );
   }
