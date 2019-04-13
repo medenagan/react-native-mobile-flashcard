@@ -3,23 +3,17 @@ import { connect } from "react-redux";
 import styles from "../utils/styles";
 
 import {
-  Image,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   FlatList
 } from 'react-native';
-import { WebBrowser } from 'expo';
-
-import { MonoText } from '../components/StyledText';
 
 import { decksCollectionToArray } from "../utils/helper";
 
 import { DeckInfo } from "../components/DeckInfo";
-
 
 class DeckListView extends React.Component {
 
