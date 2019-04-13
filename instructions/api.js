@@ -1,6 +1,6 @@
 /*
 
-To manage your AsyncStorage database, you'll want to create four different helper methods.
+To manage your AsyncStorage database, you"ll want to create four different helper methods.
 
 getDecks: return all of the decks along with their titles, questions, and answers.
 getDeck: take in a single id argument and return the deck associated with that id.

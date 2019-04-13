@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
   FlatList
-} from 'react-native';
+} from "react-native";
 
 import { decksCollectionToArray } from "../utils/helper";
 

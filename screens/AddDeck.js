@@ -5,7 +5,7 @@ import styles from "../utils/styles";
 
 import { TextButton } from "../components/TextButton";
 
-import { View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
+import { View, Text, TextInput, KeyboardAvoidingView } from "react-native";
 
 import { requestAddDeck } from "../actions";
 

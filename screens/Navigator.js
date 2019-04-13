@@ -1,17 +1,17 @@
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 
 import {
   createAppContainer,
   createStackNavigator,
   createBottomTabNavigator,
   createMaterialTopTabNavigator
-} from 'react-navigation';
+} from "react-navigation";
 
-import DeckListView from './DeckListView';
-import DeckOverview from './DeckOverview';
-import AddCard from './AddCard';
-import QuizView from './QuizView';
-import AddDeck from './AddDeck';
+import DeckListView from "./DeckListView";
+import DeckOverview from "./DeckOverview";
+import AddCard from "./AddCard";
+import QuizView from "./QuizView";
+import AddDeck from "./AddDeck";
 
 
 const stackRouteConfigs = {

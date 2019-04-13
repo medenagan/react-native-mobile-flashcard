@@ -6,7 +6,7 @@ import styles from "../utils/styles";
 import { DeckInfo } from "../components/DeckInfo";
 import { TextButton } from "../components/TextButton";
 
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 
 import { findLatestDeck } from "../utils/helper";
 
@@ -24,7 +24,7 @@ class DeckOverview extends React.Component {
   handleStartQuiz = (key) => this.props.navigation.push("QuizView", {key});
 
   handleDelete = (deck) => {
-    Alert.alert("Delete Deck", `''${deck.title}' will NOT be recoverable`, [
+    Alert.alert("Delete Deck", `'${deck.title}' will NOT be recoverable`, [
       {
         text: "Keep",
         style: "cancel"

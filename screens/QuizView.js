@@ -5,7 +5,9 @@ import styles from "../utils/styles";
 
 import { TextButton } from "../components/TextButton";
 
-import { View, Text } from 'react-native';
+import { View, Text } from "react-native";
+
+import { unscheduleReminder, scheduleReminder } from "../utils/reminder";
 
 class QuizView extends React.Component {
 
@@ -68,6 +70,7 @@ class QuizView extends React.Component {
       const correctCount = questions.length - wrongCount;
       const percentage = Math.round(correctCount / questions.length * 100);
 
+      unscheduleReminder().then(_=> scheduleReminder());
 
       return (
         <View style={styles.container}>

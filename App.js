@@ -1,11 +1,16 @@
-import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import React, { Component } from "react";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Constants } from "expo";
+import { scheduleReminder } from "./utils/reminder";
 
 import DataRoot from "./components/DataRoot";
 import Navigator from "./screens/Navigator";
 
-export default class App extends React.Component {
+export default class App extends Component {
+
+  componentDidMount() {
+    scheduleReminder();
+  }
 
   render() {
       return (
@@ -24,6 +29,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });

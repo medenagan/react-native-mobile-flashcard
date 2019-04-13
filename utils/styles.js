@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform } from "react-native";
 
 export default styles = StyleSheet.create({
   container: {
@@ -69,7 +69,7 @@ export default styles = StyleSheet.create({
       ios: {
         shadowRadius: 3,
         shadowOpacity: 0.8,
-        shadowColor: 'rgba(0, 0, 0, 0.24)',
+        shadowColor: "rgba(0, 0, 0, 0.24)",
         shadowOffset: {
           width: 0,
           height: 3
