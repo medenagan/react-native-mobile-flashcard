@@ -83,8 +83,7 @@ class QuizView extends React.Component {
             }</Text>
           }
 
-          <Text style={styles.text}>Your stats:</Text>
-          <Text style={[styles.text, {fontSize: 50, color: "lightblue"}]}>{percentage}%</Text>
+          <Text style={[styles.text, {fontSize: 50, color: "lightblue", fontWeight: "bold"}]}>{percentage}%</Text>
           <Text style={[styles.text, {color: "green"}]}>{correctCount} correct</Text>
           <Text style={[styles.text, {color: "red"}]}>{wrongCount} wrong</Text>
 
