@@ -1,67 +1,9 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
 import { AppLoading, Asset, Font, Icon, Constants } from "expo";
-import AppNavigator from './navigation/AppNavigator';
 
 import DataRoot from "./components/DataRoot";
-
-import DeckListView from './screens/DeckListView';
-import DeckOverview from './screens/DeckOverview';
-import AddCard from './screens/AddCard';
-import QuizView from './screens/QuizView';
-import AddDeck from './screens/AddDeck';
-
-
-import { createAppContainer, createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
-const HOME = class extends React.Component {
-
-  static navigationOptions = {
-    title: "Decks"
-  };
-
-  render() {
-    const { navigation } = this.props;
-    return <Text onPress={() => navigation.navigate("Coniglio")}>La mia casa</Text>;
-  }
-}
-
-const DecksNavigator = createAppContainer(createStackNavigator({
-  DeckListView: {
-    screen: DeckListView,
-  },
-  DeckOverview: {
-    screen: DeckOverview
-  },
-  AddCard: {
-    screen: AddCard
-  },
-  QuizView: {
-    screen: QuizView
-  }
-}, {
-  initialRouteName: "DeckListView",
-  ...Platform.select({
-    ios: {
-      mode: "modal"
-    },
-    android: {
-      mode: "card"
-    }
-  }),
-  headerStyle: {
-    backgroundColor: "red"
-  }
-}));
-
-const Navigatore = createAppContainer(createBottomTabNavigator({
-  DeckListView: {
-    screen: DecksNavigator
-  },
-  AddDeck
-}));
-
-
+import Navigator from "./screens/Navigator";
 
 export default class App extends React.Component {
   state = {
@@ -84,7 +26,7 @@ export default class App extends React.Component {
              <StatusBar translucent backgroundColor="lightblue"/>
             </View>
           <DataRoot>
-             <Navigatore />
+             <Navigator />
           </DataRoot>
         </View>
       );
