@@ -1,11 +1,15 @@
 import { Platform } from "react-native";
 
 import {
-  createAppContainer,
-  createStackNavigator,
+  createAppContainer
+} from "react-navigation";
+
+import { createStackNavigator } from "react-navigation-stack";
+
+import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator
-} from "react-navigation";
+} from "react-navigation-tabs";
 
 import DeckListView from "./DeckListView";
 import DeckOverview from "./DeckOverview";

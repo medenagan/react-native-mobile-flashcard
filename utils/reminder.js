@@ -1,4 +1,9 @@
-import { Notifications, Permissions } from "expo";
+import { Notifications } from "expo";
+import * as Permissions from 'expo-permissions';
+
+// FIXME
+//import { Notifications, Permissions } from "expo-permissions";
+
 
 const { askAsync, NOTIFICATIONS } = Permissions;
 

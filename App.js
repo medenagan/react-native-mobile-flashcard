@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { Constants } from "expo";
+import Constants from "expo-constants";
 import { scheduleReminder } from "./utils/reminder";
 
 import DataRoot from "./components/DataRoot";
